@@ -5,23 +5,26 @@ import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 
-const SignUp = () => {
-    // email verification পাঠাতে হবে
 
-    // create user email, pass sign in
+
+const SignUp = () => {
+
+    // create user with email and password
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
 
     // update profile
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+
     // google sign in
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
 
 
     // use form
@@ -68,7 +71,7 @@ const SignUp = () => {
     }
 
 
-    // error declare
+    // error message declare and error handle
     let errorMessage;
 
     if (error || gError || updateError) {
@@ -79,7 +82,7 @@ const SignUp = () => {
     // form submit
 
     const onSubmit = async data => {
-        // console.log(data)
+
         const name = data.name;
         const email = data.email;
         const password = data.password;
@@ -89,9 +92,6 @@ const SignUp = () => {
 
         // update profile
         await updateProfile({ displayName: name });
-
-        // navigate user
-        // navigate('/appointment');
     };
 
     return (

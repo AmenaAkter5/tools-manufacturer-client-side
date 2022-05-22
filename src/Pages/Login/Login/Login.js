@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from './../../Shared/Loading/Loading';
+import { toast } from 'react-toastify';
 
 
 
 const Login = () => {
-    // forget password করতে হবে
 
-    // email, pass sign in
+    // sign in with email and password hook
     const [
         signInWithEmailAndPassword,
         user,
@@ -18,11 +18,17 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    // google sign in
+
+    // password reset email sent hook
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
+
+    // google sign in hook
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
+
     // use react hook form
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, getValues, formState: { errors }, handleSubmit } = useForm();
 
 
     // use token
@@ -55,12 +61,12 @@ const Login = () => {
 
 
     // loading handle
-    if (loading || gLoading) {
+    if (loading || gLoading || sending) {
         return <Loading></Loading>
     }
 
 
-    // error declare
+    // error message declare and error handle
     let errorMessage;
 
     if (error || gError) {
@@ -68,17 +74,29 @@ const Login = () => {
     }
 
 
+    // form submit
     const onSubmit = data => {
-        // console.log(data)
+
         const email = data.email;
         const password = data.password;
 
         // sign in
         signInWithEmailAndPassword(email, password);
 
-        // navigate user
-        // navigate('/appointment');
     };
+
+
+    // reset password email sent button handler
+    const resetPassword = async () => {
+        const email = getValues("email");
+        if (email) {
+            await sendPasswordResetEmail(email);
+            toast('Sent email');
+        }
+        else {
+            toast('please enter your email address');
+        }
+    }
 
 
 
@@ -133,6 +151,7 @@ const Login = () => {
                     </form>
 
                     <p className='text-center'>New to Toolsify? <Link to="/signup" className='text-secondary'>Create New Account</Link></p>
+                    <p className='text-center'>Forget Password? <Link to='' className='text-secondary' onClick={resetPassword}>Reset Password</Link></p>
                     <div className="divider">OR</div>
                     <button
                         onClick={() => signInWithGoogle()}

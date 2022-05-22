@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from './Pages/Home/Home/Home';
 import Login from './Pages/Login/Login/Login';
 import RequireAuth from './Pages/Login/RequireAuth/RequireAuth';
@@ -7,6 +8,7 @@ import SignUp from './Pages/Login/SignUp/SignUp';
 import Navbar from './Pages/Shared/Navbar/Navbar';
 import NotFound from './Pages/Shared/NotFound/NotFound';
 import Purchase from './Purchase/Purchase/Purchase';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -26,6 +28,7 @@ function App() {
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
