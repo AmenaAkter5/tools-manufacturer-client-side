@@ -1,27 +1,30 @@
 import React, { useEffect } from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import auth from '../../../firebase.init';
-import { useForm } from "react-hook-form";
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Loading from './../../Shared/Loading/Loading';
+import auth from '../../../firebase.init';
+import Loading from '../../Shared/Loading/Loading';
 
+const SignUp = () => {
+    // email verification পাঠাতে হবে
 
-
-const Login = () => {
-    // forget password করতে হবে
-
-    // email, pass sign in
+    // create user email, pass sign in
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth);
+
+
+    // update profile
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
     // google sign in
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
-    // use react hook form
+
+    // use form
     const { register, formState: { errors }, handleSubmit } = useForm();
 
 
@@ -36,26 +39,29 @@ const Login = () => {
 
 
     // এখন token পেলে navigate করবো
-    useEffect(() => {
-
-        // token এর সময় token দেবো
-        if (user || gUser) {
-            navigate(from, { replace: true });
-        }
-
-    }, [user, gUser, navigate, from])
-
-
     /* useEffect(() => {
+
         if (token) {
             navigate(from, { replace: true });
         }
-    }, [token, from, navigate]) */
+
+    }, [token, navigate, from]) */
+
+
+    useEffect(() => {
+        if (user || gUser) {
+            navigate(from, { replace: true });
+        }
+        // module - 75
+        // user পেলে backend এ data পাঠাতে পারি এখান থেকে
+        // যেহেতু login page এ ও এই কাজ হবে তাই custom hook এ করবো
+        // custom hook এই page থেকে use করবো
+    }, [user, gUser, from, navigate])
 
 
 
     // loading handle
-    if (loading || gLoading) {
+    if (loading || gLoading || updating) {
         return <Loading></Loading>
     }
 
@@ -63,32 +69,51 @@ const Login = () => {
     // error declare
     let errorMessage;
 
-    if (error || gError) {
-        errorMessage = <p className='text-red-600'>{error?.message || gError?.message}</p>
+    if (error || gError || updateError) {
+        errorMessage = <p className='text-red-600'>{error?.message || gError?.message || updateError?.message}</p>
     }
 
 
-    const onSubmit = data => {
+    // form submit
+
+    const onSubmit = async data => {
         // console.log(data)
+        const name = data.name;
         const email = data.email;
         const password = data.password;
 
-        // sign in
-        signInWithEmailAndPassword(email, password);
+        // create user sign in
+        await createUserWithEmailAndPassword(email, password);
+
+        // update profile
+        await updateProfile({ displayName: name });
 
         // navigate user
         // navigate('/appointment');
     };
 
-
-
     return (
         <div className='flex h-screen justify-center items-center'>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
-                    <h2 className="text-center text-2xl font-bold">Login</h2>
+                    <h2 className="text-center text-2xl font-bold">Sign Up</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)}>
+
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input type="text" placeholder="Your Name" className="input input-bordered w-full max-w-xs" {...register("name", {
+                                required: {
+                                    value: true,
+                                    message: 'Name is Required'
+                                }
+                            })} />
+                            <label className="label">
+                                {errors.name?.type === 'required' && <span className="label-text-alt text-red-600">{errors.name?.message}</span>}
+                            </label>
+                        </div>
 
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
@@ -129,10 +154,10 @@ const Login = () => {
                             </label>
                         </div>
                         {errorMessage}
-                        <input className='btn w-full max-w-xs' type="submit" value="Login " />
+                        <input className='btn w-full max-w-xs' type="submit" value="Sign Up " />
                     </form>
 
-                    <p className='text-center'>New to Toolsify? <Link to="/signup" className='text-secondary'>Create New Account</Link></p>
+                    <p className='text-center'>Already Have an account? <Link to="/login" className='text-secondary'>Log in Please</Link></p>
                     <div className="divider">OR</div>
                     <button
                         onClick={() => signInWithGoogle()}
@@ -144,4 +169,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;
