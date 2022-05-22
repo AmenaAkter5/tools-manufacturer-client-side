@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 
@@ -34,15 +34,16 @@ const SignUp = () => {
 
     // use navigate hook
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+    // const location = useLocation();
+    // const from = location.state?.from?.pathname || "/";
 
 
     // এখন token পেলে navigate করবো
     /* useEffect(() => {
 
         if (token) {
-            navigate(from, { replace: true });
+            // navigate(from, { replace: true });
+            navigate('/purchase');
         }
 
     }, [token, navigate, from]) */
@@ -50,13 +51,14 @@ const SignUp = () => {
 
     useEffect(() => {
         if (user || gUser) {
-            navigate(from, { replace: true });
+            // navigate(from, { replace: true });
+            navigate('/purchase');
         }
         // module - 75
         // user পেলে backend এ data পাঠাতে পারি এখান থেকে
         // যেহেতু login page এ ও এই কাজ হবে তাই custom hook এ করবো
         // custom hook এই page থেকে use করবো
-    }, [user, gUser, from, navigate])
+    }, [user, gUser, navigate])
 
 
 
