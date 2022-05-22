@@ -3,12 +3,28 @@ import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
+
+    /* // get user
+    const [user] = useAuthState(auth);
+
+    // log out
+    const logOut = () => {
+        signOut(auth);
+
+        // module-75
+        // token কে remove করে দিবো
+        localStorage.removeItem('accessToken');
+    } */
+
+
+    // menu items
     const menuItems = <>
         <li><Link to="/home">Home</Link></li>
         <li><Link to="/purchase">Purchase</Link></li>
         <li><Link to="/reviews">Reviews</Link></li>
         <li><Link to="/contact">Contact</Link></li>
         <li><Link to="/about">About</Link></li>
+        <li><Link to="/login">Login</Link></li>
         {/* {user && <li><Link to="/dashboard">Dashboard</Link></li>}
         <li>{user ? <button onClick={logOut} className="btn btn-ghost">Sign Out</button> : <Link to="/login">Login</Link>}</li> */}
     </>
@@ -25,7 +41,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to="/" className="btn btn-ghost normal-case text-xl font-bold">Toolsify</Link>
+                <Link to="/" className="btn btn-ghost normal-case text-3xl font-bold">Toolsify</Link>
             </div>
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
