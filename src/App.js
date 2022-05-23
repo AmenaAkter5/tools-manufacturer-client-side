@@ -7,8 +7,8 @@ import RequireAuth from './Pages/Login/RequireAuth/RequireAuth';
 import SignUp from './Pages/Login/SignUp/SignUp';
 import Navbar from './Pages/Shared/Navbar/Navbar';
 import NotFound from './Pages/Shared/NotFound/NotFound';
-import Purchase from './Purchase/Purchase/Purchase';
 import { ToastContainer } from 'react-toastify';
+import Purchase from './Purchase/Purchase/Purchase';
 
 
 

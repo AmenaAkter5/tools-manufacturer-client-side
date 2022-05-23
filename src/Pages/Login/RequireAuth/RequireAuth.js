@@ -18,11 +18,15 @@ const RequireAuth = ({ children }) => {
         return <Loading></Loading>
     }
 
+    // redirect to login page if user is not logged in
     if (!user) {
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
+    // if user is logged in return the exact page
     return children;
+
 };
+
 
 export default RequireAuth;
