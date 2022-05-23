@@ -8,7 +8,7 @@ const Reviews = () => {
     useEffect(() => {
 
         fetch('reviews.json')
-            // fetch('http://localhost:5000/tools')
+            // fetch('http://localhost:5000/reviews')
             .then(res => res.json())
             .then(data => setReviews(data))
 
