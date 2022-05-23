@@ -5,6 +5,7 @@ import Reviews from '../Reviews/Reviews';
 import Summary from '../Summary/Summary';
 import Tools from '../Tools/Tools';
 
+
 const Home = () => {
     return (
         <main>
@@ -13,6 +14,7 @@ const Home = () => {
             <Summary></Summary>
             <Reviews></Reviews>
             <Footer></Footer>
+            {/* extra 2 ta section */}
         </main>
     );
 };
