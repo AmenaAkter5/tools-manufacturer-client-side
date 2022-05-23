@@ -1,17 +1,37 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Tool = ({ tool }) => {
 
-    const { img, description, name } = tool;
+    const { _id, img, description, name, price, available, minimum } = tool;
+
+
+    // use navigate hook
+    const navigate = useNavigate();
+
+
+    const purchaseStockHandler = id => {
+        navigate(`/purchase/${id}`);
+    }
 
     return (
         <div className="card lg:max-w-lg bg-base-100 shadow-xl">
             <figure className="px-10 pt-10">
                 <img src={img} alt="services" className="rounded-xl" />
             </figure>
-            <div className="card-body items-center text-center">
-                <h2 className="card-title">{name}</h2>
-                <p>{description}</p>
+            <div className="card-body">
+                <h2 className="text-xl font-bold text-center">{name}</h2>
+                <h4 className='text-xl text-center mb-2'>$<span className='text-orange-500 font-bold'>{price}</span> (per unit)</h4>
+                {
+                    available === 0
+                        ?
+                        <h5 className='text-left mb-0 text-xl text-red-600 font-bold'>Out of Stock</h5>
+                        :
+                        <p className='text-left leading-none'><span className='font-bold'>Available Quantity:</span> {available} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
+                }
+                <p className='text-left mt-0'><span className='font-bold'>minimum order quantity:</span> {minimum} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
+                <p className='text-justify mb-4'>{description}</p>
+                <button onClick={() => purchaseStockHandler(_id)} className="btn btn-primary bg-gradient-to-r from-secondary to-primary uppercase text-white font-bold">Purchase</button>
             </div>
         </div>
     );

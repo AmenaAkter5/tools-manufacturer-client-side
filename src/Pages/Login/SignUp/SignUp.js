@@ -55,7 +55,7 @@ const SignUp = () => {
     useEffect(() => {
         if (user || gUser) {
             // navigate(from, { replace: true });
-            navigate('/purchase');
+            navigate('/home');
         }
         // module - 75
         // user পেলে backend এ data পাঠাতে পারি এখান থেকে
