@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate, useParams } from 'react-router-dom';
+// import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import auth from '../../firebase.init';
+import { toast } from 'react-toastify';
 
 
 
 const Purchase = () => {
 
 
+    // get user
     const [user] = useAuthState(auth);
 
     // get dynamic parameter of route
     const { id } = useParams();
 
 
-    // fruit item data state
+
+    // if use react query
+    /* const { data: tool, isLoading, refetch } = useQuery('tools', () =>
+
+        fetch(`http://localhost:5000/available?date=${formattedDate}`)
+            .then(res => res.json()
+
+            )
+    ) */
+
+
+    // tool data state
     const [tool, setTool] = useState({});
 
 
@@ -30,79 +44,112 @@ const Purchase = () => {
     }, [id, tool]);
 
 
-    /* const { data: tool, isLoading, refetch } = useQuery('tools', () =>
-
-        fetch(`http://localhost:5000/available?date=${formattedDate}`)
-            .then(res => res.json()
-
-            )
-    ) */
-
 
     // destructure
-    const { img, description, name, price, available, minimum } = tool;
-
-
-    // delivered button handle
-    const deliverdButtonHandle = () => {
-
-        // update quantity
-        const quantity = parseInt(tool.available) - 1;
-        const updatedItem = { quantity };
-
-
-        // update data to server
-        const url = `https://pure-cliffs-64798.herokuapp.com/fruits/${id}`
-
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedItem),
-        })
-            .then(response => response.json())
-            .then(data => {
-                // console.log('Success:', data);
-            })
-    };
+    const { _id, img, description, name, price, available, minimum } = tool;
 
 
 
-    // restock form submission handle
-    const handleUpdateQuantity = event => {
+    const handleOrder = event => {
         event.preventDefault();
 
-        // update quantity
-        const restockedQuantity = event.target.quantity.value;
-        const quantity = tool.available + parseInt(restockedQuantity);
+        const orderQuantity = parseInt(event.target.quantity.value);
+        // console.log(quantity);
 
-        const updatedItem = { quantity };
+        // order data
+        const order = {
+            toolId: _id,
+            tool: name,
+            quantity: orderQuantity,
+            price: price,
+            buyer: user.email,
+            buyerName: user.displayName,
+            phone: event.target.phone.value,
+            address: event.target.address.value,
+        }
 
-        // update data to server
-        const url = `https://pure-cliffs-64798.herokuapp.com/fruits/${id}`
-        fetch(url, {
-            method: 'PUT',
+
+        fetch('http://localhost:5000/orders', {
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'content-type': 'application/json'
             },
-            body: JSON.stringify(updatedItem),
+            body: JSON.stringify(order)
         })
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => {
-                // console.log('Success:', data);
+
+                // console.log(data);
+
+                // order success
+                if (data.insertedId) {
+                    toast.success('Order is placed successfully!!')
+                }
+
+                // order unsuccess
+                else {
+                    toast.error('Fail to place order')
+                }
+
+
+
+                // update available quantity
+                const quantity = parseInt(available - orderQuantity);
+                const updatedItem = { quantity };
+
+
+                // update data to server
+                const url = `http://localhost:5000/tools/${_id}`
+
+                fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedItem),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // console.log(data);
+                    })
+
+
                 event.target.reset();
+                setMinQuantity(minimum);
+
+                // refetch from react query
+                // refetch();
+
+
             })
-    };
 
 
-    // use navigate hook
+    }
+
+
+
+    // minimum order quantity state
+    const [minQuantity, setMinQuantity] = useState(0);
+
+    useEffect(() => {
+        setMinQuantity(minimum);
+    }, [minimum]);
+
+
+    // minimum order input change handler
+    const handleChange = event => {
+        setMinQuantity(event.target.value);
+    }
+
+
+    /* // use navigate hook
     const navigate = useNavigate();
 
     // manage inventory button handler
     const manageInventoryHandle = () => {
         navigate('/inventory');
-    }
+    } */
+
 
 
     return (
@@ -128,39 +175,57 @@ const Purchase = () => {
                         }
                         <p className='text-left mt-0'><span className='font-bold'>minimum order quantity:</span> {minimum} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
                         <p className='text-justify mb-4'>{description}</p>
-                        {/* <button onClick={() => purchaseStockHandler(_id)} className="btn btn-primary bg-gradient-to-r from-secondary to-primary uppercase text-white font-bold">Purchase</button> */}
                     </div>
                 </div>
                 <div className="card lg:max-w-lg bg-base-100 shadow-xl">
                     <div className="card-body">
-                        <div className='restock-content'>
+                        <div>
                             <div>
-                                <h3 className='text-center text-white mb-4'>Restock the items</h3>
+                                <h3 className='text-center mb-4'>Restock the items</h3>
                             </div>
-                            {/* <form onSubmit={handleUpdateQuantity} className='text-center'>
-                                <input className='me-2 p-1 w-50' type="number" name="quantity" id="" placeholder='Input Your Item Number' />
-                                <input style={{ color: '#220768' }} className='px-3 py-1 fw-bold' type="submit" value="Restock" />
-                            </form> */}
-                            <form onSubmit={handleUpdateQuantity} className='grid grid-cols-1 gap-4 justify-items-center mt-6'>
-                                {/* 
-                        <input type="text" name='name' placeholder="Your Name" className="input input-bordered w-full max-w-xs" />
-                        <input type="email" name='email' placeholder="Email Address" className="input input-bordered w-full max-w-xs" />
-                        */}
 
-                                {/* module-73 */}
+                            <form onSubmit={handleOrder} className='grid grid-cols-1 gap-4 justify-items-center mt-6'>
+
+                                <label className=''>
+                                    <span className="text-left font-bold">Name</span>
+                                </label>
                                 <input type="text" name='name' readOnly value={user?.displayName || ''} className="input input-bordered w-full max-w-xs" />
+
+                                <label className="label">
+                                    <span className="label-text font-bold">Email Address</span>
+                                </label>
                                 <input type="email" name='email' readOnly value={user?.email || ''} className="input input-bordered w-full max-w-xs" />
+
+                                <label className="label">
+                                    <span className="label-text font-bold">Phone Number</span>
+                                </label>
                                 <input type="text" name='phone' placeholder="Phone Number" className="input input-bordered w-full max-w-xs" />
+
+                                <label className="label">
+                                    <span className="label-text font-bold">Address</span>
+                                </label>
                                 <input type="text" name='address' placeholder="Your Address" className="input input-bordered w-full max-w-xs" />
-                                <input type="submit" value='Submit' className="btn btn-secondary text-white w-full max-w-xs" />
+
+
+                                <label className="label">
+                                    <span className="label-text font-bold">Order Quantity</span>
+                                </label>
+                                <input type="text" name='quantity' value={minQuantity || ''} onChange={handleChange} className="input input-bordered w-full max-w-xs" />
+                                <label className="label">
+                                    {minimum > minQuantity && <span className="label-text text-red-600">You cant't place order below than minimum quantity</span>}
+                                    {minQuantity > available && <span className="label-text text-red-600">You cant't place order more than available quantity</span>}
+                                </label>
+
+                                <input type="submit" disabled={minimum > minQuantity || minQuantity > available} value='Place Order' className="btn btn-secondary text-white w-full max-w-xs" />
                             </form>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div className='text-center'>
+            {/* <div className='text-center'>
                 <button onClick={manageInventoryHandle} style={{ color: '#220768', fontSize: '20px' }} className='btn btn-link fw-bold mt-5 px-5 bg-white'>Manage Inventories</button>
-            </div>
+            </div> */}
         </section>
     );
 };
