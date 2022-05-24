@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from '../../Shared/Footer/Footer';
 import Banner from '../Banner/Banner';
+import Contact from '../Contact/Contact';
 import Reviews from '../Reviews/Reviews';
 import Summary from '../Summary/Summary';
 import Tools from '../Tools/Tools';
@@ -13,6 +14,7 @@ const Home = () => {
             <Tools></Tools>
             <Summary></Summary>
             <Reviews></Reviews>
+            <Contact></Contact>
             <Footer></Footer>
             {/* extra 2 ta section */}
         </main>

@@ -1,18 +1,22 @@
 import React from 'react';
-import chair from '../../../images/chair.png';
+import banner1 from '../../../images/banner (1).png';
+import './Banner.css';
+
 
 const Banner = () => {
+
     return (
-        <div className="hero min-h-screen">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <img src={chair} className="max-w-sm rounded-lg shadow-2xl" alt='chair' />
-                <div className='pr-5'>
-                    <h1 className="text-5xl font-bold">Your New Smile Starts Here</h1>
-                    <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                    <button className="btn btn-primary bg-gradient-to-r from-secondary to-primary uppercase text-white font-bold">Get Startedf</button>
+        <section className='bg-primary text-white'>
+            <div className='banner-body'>
+                <div className=''>
+                    <h1 className='banner-heading'>Toolsify Manufacturer LTD.</h1>
+                    <p className='banner-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, iusto! Ducimus quam blanditiis cumque magni repellendus quidem. Reprehenderit nihil cupiditate quam? Possimus ab facilis quasi quod nihil in dolorem voluptas.</p>
+                </div>
+                <div className='banner-img'>
+                    <img src={banner1} alt="banner" />
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

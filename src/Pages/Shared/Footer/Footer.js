@@ -32,7 +32,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className='mt-16 text-center'>
-                <p>Copyright © 2022 - All right reserved</p>
+                <p>Copyright © 2022 - Toolsify.com</p>
             </div>
         </footer>
     );

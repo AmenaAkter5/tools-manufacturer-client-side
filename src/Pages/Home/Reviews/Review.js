@@ -7,7 +7,7 @@ const Review = ({ review }) => {
     return (
         <div className="card lg:max-w-lg bg-base-100 shadow-xl">
             <figure className="px-10 pt-10">
-                <img src={img} alt="services" className="rounded-xl" />
+                <img width={150} src={img} alt="services" className="rounded-xl" />
             </figure>
             <div className="card-body">
                 <h2 className="text-xl font-bold text-center">{name}</h2>
