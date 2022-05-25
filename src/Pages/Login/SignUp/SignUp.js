@@ -3,6 +3,7 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import useToken from '../../../hooks/useToken';
 import Loading from '../../Shared/Loading/Loading';
 
 
@@ -32,24 +33,21 @@ const SignUp = () => {
 
 
     // use token
-    // const [token] = useToken(user || gUser);
+    const [token] = useToken(user || gUser);
 
 
     // use navigate hook
     const navigate = useNavigate();
-    // const location = useLocation();
-    // const from = location.state?.from?.pathname || "/";
 
 
-    // এখন token পেলে navigate করবো
-    /* useEffect(() => {
+    // after getting token redirect user to the previous page
+    useEffect(() => {
 
         if (token) {
-            // navigate(from, { replace: true });
             navigate('/purchase');
         }
 
-    }, [token, navigate, from]) */
+    }, [token, navigate])
 
 
     useEffect(() => {

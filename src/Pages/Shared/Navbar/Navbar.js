@@ -14,9 +14,8 @@ const Navbar = () => {
     const logOut = () => {
         signOut(auth);
 
-        // module-75
-        // token কে remove করে দিবো
-        // localStorage.removeItem('accessToken');
+        // remove token
+        localStorage.removeItem('accessToken');
     }
 
 

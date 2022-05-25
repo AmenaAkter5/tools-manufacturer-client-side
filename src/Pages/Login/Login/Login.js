@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from './../../Shared/Loading/Loading';
 import { toast } from 'react-toastify';
+import useToken from '../../../hooks/useToken';
 
 
 
@@ -32,7 +33,7 @@ const Login = () => {
 
 
     // use token
-    // const [token] = useToken(user || gUser);
+    const [token] = useToken(user || gUser);
 
 
     // use navigate hook
@@ -41,22 +42,12 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
 
 
-    // এখন token পেলে navigate করবো
+    // after getting token redirect user to the previous page
     useEffect(() => {
-
-        // token এর সময় token দেবো
-        if (user || gUser) {
-            navigate(from, { replace: true });
-        }
-
-    }, [user, gUser, navigate, from])
-
-
-    /* useEffect(() => {
         if (token) {
             navigate(from, { replace: true });
         }
-    }, [token, from, navigate]) */
+    }, [token, from, navigate])
 
 
 
