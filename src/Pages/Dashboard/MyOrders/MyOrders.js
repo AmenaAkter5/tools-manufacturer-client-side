@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import CancelOrder from './CancelOrder';
 
 
 const MyOrders = () => {
@@ -11,6 +12,8 @@ const MyOrders = () => {
     const [user] = useAuthState(auth);
 
     const [orders, setOrders] = useState([]);
+
+    const [order, setOrder] = useState(null);
 
     const email = user?.email;
 
@@ -49,7 +52,7 @@ const MyOrders = () => {
 
 
     // Delete button handler
-    const handleDelete = id => {
+    /* const handleDelete = id => {
 
         const proceed = window.confirm('Are you sure to delete?');
 
@@ -65,7 +68,7 @@ const MyOrders = () => {
                     setOrders(remaining);
                 });
         }
-    };
+    }; */
 
 
     return (
@@ -102,13 +105,21 @@ const MyOrders = () => {
                                     </div>}
                                 </td>
                                 <td>
-                                    {(order.price && !order.paid) ? <button onClick={() => handleDelete(order._id)} className='btn btn-xs btn-error text-white font-bold'>Cancel</button> : ''}
+                                    {(order.price && !order.paid) ? <label htmlFor="delete-modal" onClick={() => setOrder(order)} className='btn btn-xs btn-error text-white font-bold'>Cancel</label> : ''}
                                 </td>
                             </tr>)
                         }
                     </tbody>
                 </table>
             </div>
+            {
+                order && <CancelOrder
+                    orders={orders}
+                    setOrders={setOrders}
+                    order={order}
+                    setOrder={setOrder}
+                ></CancelOrder>
+            }
         </div>
     );
 };

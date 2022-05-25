@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import CancelOrder from '../MyOrders/CancelOrder';
 
 
 
@@ -12,6 +13,8 @@ const ManageOrders = () => {
     const [user] = useAuthState(auth);
 
     const [orders, setOrders] = useState([]);
+
+    const [order, setOrder] = useState(null);
 
     const email = user?.email;
 
@@ -70,26 +73,6 @@ const ManageOrders = () => {
     }
 
 
-    // Delete button handler
-    const handleDelete = id => {
-
-        const proceed = window.confirm('Are you sure to delete?');
-
-        if (proceed) {
-            const url = `http://localhost:5000/orders/${id}`
-            fetch(url, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    // console.log(data);
-                    const remaining = orders.filter(order => order._id !== id);
-                    setOrders(remaining);
-                });
-        }
-    };
-
-
     return (
         <div>
             <h1 className='profile-title text-primary'>All Orders List</h1>
@@ -127,15 +110,27 @@ const ManageOrders = () => {
                                     </div>}
                                 </td>
                                 <td>
-                                    {(order.price && order.paid && !order.shipment) ? <button
+                                    {(order.price && order.paid && !order.shipment) && <button
                                         onClick={() => handleShipment(order._id)}
-                                        className='btn btn-xs btn-primary text-white font-bold'>Shipment</button> : <button onClick={() => handleDelete(order._id)} className='btn btn-xs btn-error text-white font-bold'>Cancel</button>}
+                                        className='btn btn-xs btn-primary text-white font-bold'>Shipment</button>}
+                                    {
+                                        (order.price && !order.paid && !order.shipment) &&
+                                        <label htmlFor="delete-modal" onClick={() => setOrder(order)} className='btn btn-xs btn-error text-white font-bold'>Cancel</label>
+                                    }
                                 </td>
                             </tr>)
                         }
                     </tbody>
                 </table>
             </div>
+            {
+                order && <CancelOrder
+                    orders={orders}
+                    setOrders={setOrders}
+                    order={order}
+                    setOrder={setOrder}
+                ></CancelOrder>
+            }
         </div>
     );
 };
