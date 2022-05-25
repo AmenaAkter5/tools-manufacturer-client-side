@@ -106,7 +106,6 @@ const CheckoutForm = ({ order }) => {
         }
         else {
             setCardError('');
-            // console.log(paymentIntent);
             setTransactionId(paymentIntent?.id);
             setSuccess('Congrats! Your payment is successful')
 

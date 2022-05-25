@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
-// import Loading from '../../Shared/Loading/Loading';
+
 
 const MyOrders = () => {
 
@@ -20,7 +20,7 @@ const MyOrders = () => {
     useEffect(() => {
 
         if (user) {
-            fetch(`http://localhost:5000/orders?buyer=${email}`, {
+            fetch(`http://localhost:5000/order?buyer=${email}`, {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -32,13 +32,8 @@ const MyOrders = () => {
 
                     if (res.status === 401 || res.status === 403) {
 
-                        // sign out
                         signOut(auth);
-
-                        // remove token
                         localStorage.removeItem('accessToken');
-
-                        // navigate to home page
                         navigate('/');
                     }
 
@@ -50,7 +45,27 @@ const MyOrders = () => {
                 })
         }
 
-    }, [user, email, navigate]);
+    }, [orders, user, email, navigate]);
+
+
+    // Delete button handler
+    const handleDelete = id => {
+
+        const proceed = window.confirm('Are you sure to delete?');
+
+        if (proceed) {
+            const url = `http://localhost:5000/orders/${id}`
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    // console.log(data);
+                    const remaining = orders.filter(order => order._id !== id);
+                    setOrders(remaining);
+                });
+        }
+    };
 
 
     return (
@@ -64,9 +79,10 @@ const MyOrders = () => {
                             <th>Name</th>
                             <th>Item</th>
                             <th>Quantity</th>
-                            <th>Price (Per Unit)</th>
+                            <th>Unit Price</th>
                             <th>Total Price</th>
                             <th>Payment</th>
+                            <th>Cancel Order</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,6 +100,9 @@ const MyOrders = () => {
                                         <span className='text-green-600 font-bold'>Paid</span>
                                         <p>Transaction Id: <span className='text-orange-600'>{order.transactionId}</span></p>
                                     </div>}
+                                </td>
+                                <td>
+                                    {(order.price && !order.paid) ? <button onClick={() => handleDelete(order._id)} className='btn btn-xs btn-error text-white font-bold'>Cancel</button> : ''}
                                 </td>
                             </tr>)
                         }

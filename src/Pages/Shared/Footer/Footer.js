@@ -4,6 +4,12 @@ import footer from '../../../images/footer.png';
 
 
 const Footer = () => {
+
+
+    const today = new Date();
+    const year = today.getFullYear();
+
+
     return (
         <footer style={{
             background: `url(${footer})`,
@@ -32,7 +38,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className='mt-16 text-center text-secondary'>
-                <p>Copyright © 2022 - Toolsify.com</p>
+                <p>Copyright © {year} - Toolsify.com</p>
             </div>
         </footer>
     );
