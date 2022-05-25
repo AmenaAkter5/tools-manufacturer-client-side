@@ -15,6 +15,7 @@ import MyOrders from './Pages/Dashboard/MyOrders/MyOrders';
 import AddReview from './Pages/Dashboard/AddReview/AddReview';
 import ManageOrders from './Pages/Dashboard/ManageOrders/ManageOrders';
 import AddProduct from './Pages/Dashboard/AddProduct/AddProduct';
+import Users from './Pages/Dashboard/Users/Users';
 
 
 
@@ -42,6 +43,7 @@ function App() {
           <Route path='review' element={<AddReview></AddReview>}></Route>
           <Route path='manage' element={<ManageOrders></ManageOrders>}></Route>
           <Route path='add' element={<AddProduct></AddProduct>}></Route>
+          <Route path='users' element={<Users></Users>}></Route>
         </Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>

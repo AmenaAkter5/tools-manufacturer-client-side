@@ -44,23 +44,10 @@ const SignUp = () => {
     useEffect(() => {
 
         if (token) {
-            navigate('/purchase');
+            navigate('/home');
         }
 
     }, [token, navigate])
-
-
-    useEffect(() => {
-        if (user || gUser) {
-            // navigate(from, { replace: true });
-            navigate('/home');
-        }
-        // module - 75
-        // user পেলে backend এ data পাঠাতে পারি এখান থেকে
-        // যেহেতু login page এ ও এই কাজ হবে তাই custom hook এ করবো
-        // custom hook এই page থেকে use করবো
-    }, [user, gUser, navigate])
-
 
 
     // loading handle

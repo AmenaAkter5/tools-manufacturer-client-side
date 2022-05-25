@@ -22,16 +22,15 @@ const useToken = user => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    // console.log('data inside use token', data);
                     const accessToken = data.token;
 
-                    // local storage token টা save রাখবো
+                    // save token to local storage
                     localStorage.setItem("accessToken", accessToken);
-
                     setToken(accessToken);
                 })
         }
-    }, [user])
+
+    }, [user]);
 
     return [token, setToken];
 
