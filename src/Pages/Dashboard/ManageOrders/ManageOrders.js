@@ -50,7 +50,6 @@ const ManageOrders = () => {
 
 
     const handleShipment = id => {
-        // update payment on database
 
         const shipment = {
             shipment: true
@@ -71,6 +70,26 @@ const ManageOrders = () => {
     }
 
 
+    // Delete button handler
+    const handleDelete = id => {
+
+        const proceed = window.confirm('Are you sure to delete?');
+
+        if (proceed) {
+            const url = `http://localhost:5000/orders/${id}`
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    // console.log(data);
+                    const remaining = orders.filter(order => order._id !== id);
+                    setOrders(remaining);
+                });
+        }
+    };
+
+
     return (
         <div>
             <h1 className='profile-title text-primary'>All Orders List</h1>
@@ -85,7 +104,7 @@ const ManageOrders = () => {
                             <th>Unit Price</th>
                             <th>Total Price</th>
                             <th>Status</th>
-                            <th>Shipment</th>
+                            <th>Shipment or Cancel Order</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,7 +129,7 @@ const ManageOrders = () => {
                                 <td>
                                     {(order.price && order.paid && !order.shipment) ? <button
                                         onClick={() => handleShipment(order._id)}
-                                        className='btn btn-xs btn-primary text-white font-bold'>Shipment</button> : ''}
+                                        className='btn btn-xs btn-primary text-white font-bold'>Shipment</button> : <button onClick={() => handleDelete(order._id)} className='btn btn-xs btn-error text-white font-bold'>Cancel</button>}
                                 </td>
                             </tr>)
                         }
