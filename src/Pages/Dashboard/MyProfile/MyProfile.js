@@ -26,7 +26,7 @@ const MyProfile = () => {
 
     return (
         <section className='my-profile-section'>
-            <h3 className='profile-title text-primary'>My Profile</h3>
+            <h3 className='profile-title text-primary text-center'>My Profile</h3>
             <hr />
             <div className='my-profile-container'>
                 <div>
