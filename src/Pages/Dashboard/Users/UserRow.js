@@ -1,9 +1,13 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 
+
+
 const UserRow = ({ user, refetch, index }) => {
 
-    const { email } = user;
+
+    const { email, role } = user;
+
 
     const makeAdmin = () => {
 
@@ -17,19 +21,11 @@ const UserRow = ({ user, refetch, index }) => {
 
                 if (res.status === 403) {
                     toast.error('Failed to make an admin')
-
-                    // log out করে দিতে পারি ও token remove করে দিতে পারি
                 }
 
                 return res.json()
             })
             .then(data => {
-                // console.log(data);
-
-                // refetch();
-                // toast.success('Successfully made an admin');
-
-                // if (data.modifiedCount) { // or, নিচের লাইন
                 if (data.modifiedCount > 0) {
                     refetch();
                     toast.success('Successfully made an admin');
@@ -41,7 +37,7 @@ const UserRow = ({ user, refetch, index }) => {
         <tr>
             <th>{index + 1}</th>
             <th>{email}</th>
-            <th><button onClick={makeAdmin} className="btn btn-xs btn-primary text-white">Make Admin</button></th>
+            <th>{role === 'admin' ? <span className='text-secondary font-bold'>Already an admin</span> : <button onClick={makeAdmin} className="btn btn-xs btn-primary text-white">Make Admin</button>}</th>
             <th><button className="btn btn-xs btn-secondary text-white">Remove User</button></th>
         </tr>
     );
