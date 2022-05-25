@@ -31,7 +31,7 @@ const UserRow = ({ user, refetch, index }) => {
                     toast.success('Successfully made an admin');
                 }
             })
-    }
+    };
 
     return (
         <tr>
