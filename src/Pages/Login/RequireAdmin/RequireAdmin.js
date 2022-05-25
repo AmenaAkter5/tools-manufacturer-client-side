@@ -13,6 +13,7 @@ const RequireAdmin = ({ children }) => {
     // get user
     const [user, loading] = useAuthState(auth);
 
+    // get admin
     const [admin, adminLoading] = useAdmin(user);
 
     // location

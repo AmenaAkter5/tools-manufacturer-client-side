@@ -10,6 +10,7 @@ const useAdmin = user => {
 
     useEffect(() => {
         const email = user?.email;
+
         if (email) {
             fetch(`http://localhost:5000/admin/${email}`, {
 
@@ -18,7 +19,7 @@ const useAdmin = user => {
                     'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
-                // body: JSON.stringify(currentUser) // দরকার নাই
+
             })
                 .then(res => res.json())
                 .then(data => {
