@@ -32,7 +32,8 @@ const Tool = ({ tool }) => {
                 }
                 <p className='text-left mt-0'><span className='font-bold'>minimum order quantity:</span> {minimum} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
                 <p className='text-justify mb-4'>{description}</p>
-                <button onClick={() => purchaseStockHandler(_id)} className="btn btn-primary bg-gradient-to-r from-secondary to-primary uppercase text-white font-bold">Purchase</button>
+                <button onClick={() => purchaseStockHandler(_id)} className="btn btn-secondary uppercase text-white font-bold">Purchase</button>
+                {/* <button onClick={() => purchaseStockHandler(_id)} className="btn btn-primary bg-gradient-to-r from-secondary to-primary uppercase text-white font-bold">Purchase</button> */}
             </div>
         </div>
     );

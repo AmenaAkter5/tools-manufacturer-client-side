@@ -9,7 +9,8 @@ module.exports = {
         manufacturertheme: {
           primary: "#120600",
           secondary: "#fa4318",
-          accent: "#3A4256",
+          // accent: "#3A4256",
+          accent: "#f4f4f6",
           neutral: "#154E64",
           "base-100": "#ffffff",
         },

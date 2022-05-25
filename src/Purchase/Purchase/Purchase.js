@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { toast } from 'react-toastify';
+import './Purchase.css';
 
 
 
@@ -153,19 +154,19 @@ const Purchase = () => {
 
 
     return (
-        <section className='my-28'>
-            <div className='text-center'>
+        <section className='py-14 bg-accent'>
+            <div className='text-center mb-12'>
                 <h1 className='text-secondary text-xl font-bold uppercase'>Purchase Details</h1>
-                <h1 className='text-4xl'>Detail about <span className='text-orange-500'>{name}</span></h1>
+                <h1 className='text-4xl mt-3 text-primary'>Detail about <span className='text-secondary font-bold'>{name}</span></h1>
             </div>
-            <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10'>
+            <div className='product-container'>
                 <div className="card lg:max-w-lg bg-base-100 shadow-xl">
                     <figure className="px-10 pt-10">
-                        <img src={img} alt="services" className="rounded-xl" />
+                        <img width={200} src={img} alt="services" className="rounded-xl" />
                     </figure>
                     <div className="card-body">
-                        <h2 className="text-xl font-bold text-center">{name}</h2>
-                        <h4 className='text-xl text-center mb-2'>$<span className='text-orange-500 font-bold'>{price}</span> (per unit)</h4>
+                        <h2 className="text-2xl font-bold text-center text-primary">{name}</h2>
+                        <h4 className='text-xl text-center mb-2'>$<span className='text-secondary font-bold'>{price}</span> (per unit)</h4>
                         {
                             available === 0
                                 ?
@@ -173,7 +174,7 @@ const Purchase = () => {
                                 :
                                 <p className='text-left leading-none'><span className='font-bold'>Available Quantity:</span> {available} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
                         }
-                        <p className='text-left mt-0'><span className='font-bold'>minimum order quantity:</span> {minimum} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
+                        <p className='text-left mt-0'><span className='font-bold'>Minimum order quantity:</span> {minimum} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
                         <p className='text-justify mb-4'>{description}</p>
                     </div>
                 </div>
@@ -181,36 +182,24 @@ const Purchase = () => {
                     <div className="card-body">
                         <div>
                             <div>
-                                <h3 className='text-center mb-4'>Restock the items</h3>
+                                <h5 className='text-center font-sans text-primary font-bold text-2xl my-3'>Please Order Confirm</h5>
                             </div>
 
                             <form onSubmit={handleOrder} className='grid grid-cols-1 gap-4 justify-items-center mt-6'>
 
-                                <label className=''>
-                                    <span className="text-left font-bold">Name</span>
-                                </label>
-                                <input type="text" name='name' readOnly value={user?.displayName || ''} className="input input-bordered w-full max-w-xs" />
+                                <input type="text" name='name' readOnly disabled value={user?.displayName || ''} className="input-field max-w-xs" />
 
-                                <label className="label">
-                                    <span className="label-text font-bold">Email Address</span>
-                                </label>
-                                <input type="email" name='email' readOnly value={user?.email || ''} className="input input-bordered w-full max-w-xs" />
+                                <input type="email" name='email' readOnly value={user?.email || ''} className="input-field max-w-xs" />
 
-                                <label className="label">
-                                    <span className="label-text font-bold">Phone Number</span>
-                                </label>
-                                <input type="text" name='phone' placeholder="Phone Number" className="input input-bordered w-full max-w-xs" />
+                                <input type="text" name='phone' placeholder="Phone Number" className="input-field max-w-xs" />
 
-                                <label className="label">
-                                    <span className="label-text font-bold">Address</span>
-                                </label>
-                                <input type="text" name='address' placeholder="Your Address" className="input input-bordered w-full max-w-xs" />
+                                <input type="text" name='address' placeholder="Your Address" className="input-field max-w-xs" />
 
 
                                 <label className="label">
                                     <span className="label-text font-bold">Order Quantity</span>
                                 </label>
-                                <input type="text" name='quantity' value={minQuantity || ''} onChange={handleChange} className="input input-bordered w-full max-w-xs" />
+                                <input type="text" name='quantity' value={minQuantity || ''} onChange={handleChange} className="input-field max-w-xs" />
                                 <label className="label">
                                     {minimum > minQuantity && <span className="label-text text-red-600">You cant't place order below than minimum quantity</span>}
                                     {minQuantity > available && <span className="label-text text-red-600">You cant't place order more than available quantity</span>}

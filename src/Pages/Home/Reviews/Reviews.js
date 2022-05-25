@@ -22,8 +22,8 @@ const Reviews = () => {
     return (
         <div className='my-28 pt-24'>
             <div className='text-center'>
-                <h1 className='text-secondary text-xl font-bold uppercase'>Testimonials</h1>
-                <h1 className='text-4xl'>What Our Customers Say</h1>
+                <h1 className='text-secondary text-3xl font-bold uppercase'>Testimonials</h1>
+                <h1 className='text-4xl font-bold mb-5'>What Our Customers Say</h1>
             </div>
             <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
                 {

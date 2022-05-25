@@ -6,7 +6,7 @@ const Contact = () => {
         <section className="bg-accent">
             <div className='bg-primary px-10 py-14 '>
                 <div className='text-center pb-14 text-white'>
-                    <p className='text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-accent to-secondary'>
+                    <p className='text-3xl font-bold text-secondary uppercase bg-clip-text bg-gradient-to-br from-accent to-secondary'>
                         Contact Us
                     </p>
                     <h1 className='text-4xl font-bold mt-3'>Stay connected with us</h1>
@@ -27,7 +27,7 @@ const Contact = () => {
                         placeholder='Your message'
                         rows={6}
                     ></textarea>
-                    <button className="btn btn-secondary">Submit</button>
+                    <button className="btn btn-secondary font-bold">Submit</button>
                 </div>
             </div>
         </section>

@@ -18,22 +18,22 @@ const Summary = () => {
                     <div>
                         <img className='summary-img' src={icon1} alt="" />
                         <h1 className='text-5xl font-bold text-center'>100+</h1>
-                        <h1 className='text-2xl font-bold text-center'>Countries</h1>
+                        <h1 className='text-2xl font-bold text-center text-secondary'>Countries</h1>
                     </div>
                     <div>
                         <img className='summary-img' src={icon2} alt="" />
                         <h1 className='text-5xl text-center font-bold'>1M+</h1>
-                        <h1 className='text-2xl text-center font-bold'>Happay Clients</h1>
+                        <h1 className='text-2xl text-center font-bold text-secondary'>Happay Clients</h1>
                     </div>
                     <div>
                         <img className='summary-img' src={icon3} alt="" />
                         <h1 className='text-5xl text-center font-bold'>5K+</h1>
-                        <h1 className='text-2xl text-center font-bold'>Reviews</h1>
+                        <h1 className='text-2xl text-center font-bold text-secondary'>Reviews</h1>
                     </div>
                     <div>
                         <img className='summary-img' src={icon4} alt="" />
                         <h1 className='text-5xl text-center font-bold'>$120M</h1>
-                        <h1 className='text-2xl text-center font-bold'>Annual Revenue</h1>
+                        <h1 className='text-2xl text-center font-bold text-secondary'>Annual Revenue</h1>
                     </div>
                 </div>
             </div>
