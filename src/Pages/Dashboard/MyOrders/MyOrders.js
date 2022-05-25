@@ -1,6 +1,7 @@
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 // import Loading from '../../Shared/Loading/Loading';
 
@@ -13,72 +14,48 @@ const MyOrders = () => {
 
     const email = user?.email;
 
-
-    /*  if (!user) {
-         return <Loading></Loading>
-     } */
-
+    const navigate = useNavigate();
 
 
     useEffect(() => {
 
         if (user) {
-            fetch(`http://localhost:5000/orders?buyer=${email}`)
-                .then(res => res.json())
-                .then(data => setOrders(data))
+            fetch(`http://localhost:5000/orders?buyer=${email}`, {
+                method: 'GET',
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+                .then(res => {
+
+                    // console.log(res);
+
+                    if (res.status === 401 || res.status === 403) {
+
+                        // sign out
+                        signOut(auth);
+
+                        // remove token
+                        localStorage.removeItem('accessToken');
+
+                        // navigate to home page
+                        navigate('/');
+                    }
+
+                    return res.json();
+                })
+
+                .then(data => {
+                    setOrders(data)
+                })
         }
-    }, [user, email])
 
+    }, [user, email, navigate]);
 
-
-    // module-75 : token এর authorization information headers এ পাঠানোর জন্য
-
-    // useEffect(() => {
-
-    //     if (user) {
-    //         fetch(`http://localhost:5000/booking?patient=${email}`, {
-    //             method: 'GET',
-    //             headers: {
-    //                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-    //             }
-    //         })
-    //             .then(res => {
-
-    //                 // console.log(res);
-
-    //                 /* if (res.status === 401) {
-    //                     // navigate to home page
-    //                 }
-    //                 else if (res.status === 403) {
-    //                     // navigate to home page
-    //                 } */
-
-    //                 // এক লাইনেই করি
-    //                 /* if (res.status === 401 || res.status === 403) {
-
-    //                     // sign out করে দিবো
-    //                     signOut(auth);
-
-    //                     // token কে remove করে দিবো
-    //                     localStorage.removeItem('accessToken');
-
-    //                     // navigate to home page
-    //                     navigate('/');
-    //                 } */
-
-    //                 return res.json();
-    //             })
-
-    //             .then(data => {
-    //                 setAppointments(data)
-    //             })
-    //     }
-
-    // }, [user, email, navigate]);
 
     return (
         <div>
-            <h1 className='mb-4'>My Orders: {orders.length}</h1>
+            <h1 className='profile-title text-primary'>My Order List</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -88,6 +65,7 @@ const MyOrders = () => {
                             <th>Item</th>
                             <th>Quantity</th>
                             <th>Price (Per Unit)</th>
+                            <th>Total Price</th>
                             <th>Payment</th>
                         </tr>
                     </thead>
@@ -99,9 +77,10 @@ const MyOrders = () => {
                                 <td>{order.tool}</td>
                                 <td>{order.quantity}</td>
                                 <td>{order.price}</td>
+                                <td>{order.price * order.quantity}</td>
                                 {/* module-77 */}
                                 <td>
-                                    {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-xs btn-success text-white font-bold'>Pay</button></Link>}
+                                    {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-xs bg-green-600 text-white font-bold'>Pay</button></Link>}
                                     {(order.price && order.paid) && <div>
                                         <span className='text-success'>Paid</span>
                                         <p>Transaction Id: <span className='text-orange-600'>{order.transactionId}</span></p>

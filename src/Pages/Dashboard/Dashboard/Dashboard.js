@@ -16,8 +16,9 @@ const Dashboard = () => {
         <div className="drawer drawer-mobile py-8">
             <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
+
                 {/* <!-- Page content here --> */}
-                <h1 className='text-3xl font-bold text-secondary text-center'>Welcome to your Dashboard</h1>
+                <h1 className='text-3xl font-bold text-secondary text-center'>Welcome to Dashboard</h1>
 
                 <Outlet></Outlet>
 
@@ -27,6 +28,7 @@ const Dashboard = () => {
                 <ul className="menu p-4 overflow-y-auto w-60 bg-base-100 text-base-content">
 
                     {/* <!-- Sidebar content here --> */}
+
                     <li><Link to="/dashboard">My Profile</Link></li>
                     {
                         admin ? '' : <>
@@ -35,7 +37,6 @@ const Dashboard = () => {
                         </>
                     }
 
-                    {/* {<li><Link to="/dashboard/users">All Users</Link></li>} */}
                     {admin && <>
                         <li><Link to="/dashboard/users">All Users</Link></li>
                         <li><Link to="/dashboard/manage">Manage All Orders</Link></li>
