@@ -166,13 +166,13 @@ const Purchase = () => {
                     </figure>
                     <div className="card-body">
                         <h2 className="text-2xl font-bold text-center text-primary">{name}</h2>
-                        <h4 className='text-xl text-center mb-2'>$<span className='text-secondary font-bold'>{price}</span> (per unit)</h4>
+                        <h4 className='text-xl text-center mb-8'>$<span className='text-secondary font-bold'>{price}</span> (per unit)</h4>
                         {
                             available === 0
                                 ?
-                                <h5 className='text-left mb-0 text-xl text-red-600 font-bold'>Out of Stock</h5>
+                                <h5 className='text-left mt-0 text-xl text-red-600 font-bold'>Out of Stock</h5>
                                 :
-                                <p className='text-left leading-none'><span className='font-bold'>Available Quantity:</span> {available} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
+                                <p className='text-left leading-none mt-0'><span className='font-bold'>Available Quantity:</span> {available} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
                         }
                         <p className='text-left mt-0'><span className='font-bold'>Minimum order quantity:</span> {minimum} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
                         <p className='text-justify mb-4'>{description}</p>

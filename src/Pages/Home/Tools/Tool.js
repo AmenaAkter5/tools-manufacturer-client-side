@@ -22,7 +22,7 @@ const Tool = ({ tool }) => {
             </figure>
             <div className="card-body">
                 <h2 className="text-xl font-bold text-center">{name}</h2>
-                <h4 className='text-xl text-center mb-2'>$<span className='text-orange-500 font-bold'>{price}</span> (per unit)</h4>
+                <h4 className='text-xl text-center mb-2'>$<span className='text-secondary font-bold'>{price}</span> (per unit)</h4>
                 {
                     available === 0
                         ?

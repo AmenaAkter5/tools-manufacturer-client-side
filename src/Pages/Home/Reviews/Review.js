@@ -11,7 +11,7 @@ const Review = ({ review }) => {
             </figure>
             <div className="card-body">
                 <h2 className="text-xl font-bold text-center">{name}</h2>
-                <h4 className='text-xl text-center mb-2'>Rating: <span className='text-orange-500 font-bold'>{rating} Stars</span></h4>
+                <h4 className='text-xl text-center mb-2'>Rating: <span className='text-secondary font-bold'>{rating} Stars</span></h4>
                 <p className='text-justify mb-4'>{note}</p>
             </div>
         </div>
