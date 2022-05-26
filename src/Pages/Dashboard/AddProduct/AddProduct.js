@@ -77,7 +77,7 @@ const AddProduct = () => {
 
                         <textarea className='address-input-field' name="description" id="" cols="30" rows="2" placeholder='Product description' required></textarea>
 
-                        <input disabled={minimum < 1 || available < 1 || minimum > available} className='btn btn-primary confirm-btn' type="submit" value="Submit" />
+                        <input disabled={minimum < 1 || available < 1 || minimum > available} className='btn btn-primary text-white font-bold confirm-btn' type="submit" value="Submit" />
 
                     </form>
 

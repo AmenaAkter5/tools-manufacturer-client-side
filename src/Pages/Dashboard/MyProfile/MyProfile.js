@@ -30,8 +30,7 @@ const MyProfile = () => {
             <hr />
             <div className='my-profile-container'>
                 <div>
-                    {/* Figure */}
-
+                    {/* Image */}
                 </div>
                 <div className='my-profile-form'>
                     <form onSubmit={handleMyProfile}>
@@ -55,7 +54,7 @@ const MyProfile = () => {
                         <label htmlFor="address">Your Address</label>
                         <textarea className='address-input-field' name="address" id="" cols="30" rows="2" placeholder='Enter your address' required></textarea>
 
-                        <input className='btn btn-secondary text-white font-bold confirm-btn' type="submit" value="Submit" />
+                        <input className='btn btn-primary text-white font-bold confirm-btn' type="submit" value="Submit" />
 
 
                     </form>
