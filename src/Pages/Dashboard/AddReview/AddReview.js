@@ -27,7 +27,7 @@ const AddReview = () => {
 
 
 
-        fetch('http://localhost:5000/review', {
+        fetch('https://infinite-lake-36259.herokuapp.com/review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

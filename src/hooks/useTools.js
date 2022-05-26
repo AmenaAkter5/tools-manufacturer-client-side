@@ -8,7 +8,7 @@ const useTools = () => {
     useEffect(() => {
 
         // fetch('tools.json')
-        fetch('http://localhost:5000/tools')
+        fetch('https://infinite-lake-36259.herokuapp.com/tools')
             .then(res => res.json())
             .then(data => setTools(data))
 

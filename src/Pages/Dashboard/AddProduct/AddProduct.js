@@ -30,7 +30,7 @@ const AddProduct = () => {
         }
 
 
-        fetch('http://localhost:5000/tools', {
+        fetch('https://infinite-lake-36259.herokuapp.com/tools', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

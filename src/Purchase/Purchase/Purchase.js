@@ -26,7 +26,7 @@ const Purchase = () => {
 
     useEffect(() => {
 
-        const url = `http://localhost:5000/tools/${id}`;
+        const url = `https://infinite-lake-36259.herokuapp.com/tools/${id}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setTool(data))
@@ -58,7 +58,7 @@ const Purchase = () => {
         }
 
 
-        fetch('http://localhost:5000/orders', {
+        fetch('https://infinite-lake-36259.herokuapp.com/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -88,7 +88,7 @@ const Purchase = () => {
 
 
                 // update data to server
-                const url = `http://localhost:5000/tools/${_id}`
+                const url = `https://infinite-lake-36259.herokuapp.com/tools/${_id}`
 
                 fetch(url, {
                     method: 'PUT',

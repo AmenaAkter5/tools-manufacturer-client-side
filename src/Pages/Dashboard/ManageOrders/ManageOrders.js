@@ -24,7 +24,7 @@ const ManageOrders = () => {
     useEffect(() => {
 
         if (user) {
-            fetch(`http://localhost:5000/orders`, {
+            fetch(`https://infinite-lake-36259.herokuapp.com/orders`, {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -58,7 +58,7 @@ const ManageOrders = () => {
             shipment: true
         }
 
-        fetch(`http://localhost:5000/order/${id}`, {
+        fetch(`https://infinite-lake-36259.herokuapp.com/order/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',

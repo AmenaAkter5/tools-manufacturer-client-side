@@ -16,7 +16,7 @@ const CancelOrder = ({ orders, setOrders, order, setOrder }) => {
     // handle delete button
     const handleDelete = id => {
 
-        const url = `http://localhost:5000/orders/${id}`
+        const url = `https://infinite-lake-36259.herokuapp.com/orders/${id}`
         fetch(url, {
             method: 'DELETE'
         })
