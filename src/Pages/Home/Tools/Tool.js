@@ -28,12 +28,11 @@ const Tool = ({ tool }) => {
                         ?
                         <h5 className='text-left mb-0 text-xl text-red-600 font-bold'>Out of Stock</h5>
                         :
-                        <p className='text-left leading-none'><span className='font-bold'>Available Quantity:</span> {available} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
+                        <p className='text-left leading-none'><span className='font-bold'>Available Quantity:</span> {available} Pieces</p>
                 }
-                <p className='text-left mt-0'><span className='font-bold'>minimum order quantity:</span> {minimum} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
+                <p className='text-left mt-0'><span className='font-bold'>minimum order quantity:</span> {minimum} Pieces</p>
                 <p className='text-justify mb-4'>{description}</p>
                 <button onClick={() => purchaseStockHandler(_id)} className="btn btn-secondary uppercase text-white font-bold">Purchase</button>
-                {/* <button onClick={() => purchaseStockHandler(_id)} className="btn btn-primary bg-gradient-to-r from-secondary to-primary uppercase text-white font-bold">Purchase</button> */}
             </div>
         </div>
     );

@@ -146,9 +146,9 @@ const Purchase = () => {
                                 ?
                                 <h5 className='text-left mt-0 text-xl text-red-600 font-bold'>Out of Stock</h5>
                                 :
-                                <p className='text-left leading-none mt-0'><span className='font-bold'>Available Quantity:</span> {available} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
+                                <p className='text-left leading-none mt-0'><span className='font-bold'>Available Quantity:</span> {available} Pieces</p>
                         }
-                        <p className='text-left mt-0'><span className='font-bold'>Minimum order quantity:</span> {minimum} {name === 'Jackfruit' || name === 'Water Mealon' ? 'Kg' : 'Pieces'}</p>
+                        <p className='text-left mt-0'><span className='font-bold'>Minimum order quantity:</span> {minimum} Pieces</p>
                         <p className='text-justify mb-4'>{description}</p>
                     </div>
                 </div>
@@ -173,7 +173,7 @@ const Purchase = () => {
                                 <label className="label">
                                     <span className="label-text font-bold">Order Quantity</span>
                                 </label>
-                                <input type="text" name='quantity' value={minQuantity || minimum} onChange={handleChange} className="input-field max-w-xs" />
+                                <input type="text" name='quantity' value={minQuantity || ''} onChange={handleChange} className="input-field max-w-xs" />
                                 <label className="label">
                                     {minimum > minQuantity && <span className="label-text text-red-600">You cant't place order below than minimum quantity</span>}
                                     {minQuantity > available && <span className="label-text text-red-600">You cant't place order more than available quantity</span>}
