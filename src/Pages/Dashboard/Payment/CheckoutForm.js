@@ -128,7 +128,7 @@ const CheckoutForm = ({ order }) => {
                 .then(res => res.json())
                 .then(data => {
                     setProcessing(false);
-                    console.log(data);
+                    // console.log(data);
                 })
         }
 
