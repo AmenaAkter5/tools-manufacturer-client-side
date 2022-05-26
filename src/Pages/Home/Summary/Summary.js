@@ -38,8 +38,8 @@ const Summary = () => {
                 </div>
             </div>
 
-            <div className='quote-container'>
-                {/* Something Need to write */}
+            <div className='quote-container flex justify-center py-20'>
+                <p className='text-primary text-4xl font-bold'>Be Happy to deal with us.</p>
             </div>
         </section>
     );

@@ -10,7 +10,7 @@ const Banner = () => {
             <div className='banner-body'>
                 <div>
                     <h1 className='banner-title'>Toolsify Manufacturer LTD.</h1>
-                    <p className='banner-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, iusto! Ducimus quam blanditiis cumque magni repellendus quidem. Reprehenderit nihil cupiditate quam? Possimus ab facilis quasi quod nihil in dolorem voluptas.</p>
+                    <p className='banner-text text-2xl'>Get Your Most Wanted tools easily. Our Delivery team are always available to reach you.</p>
                 </div>
                 <div className='banner-img'>
                     <img src={banner1} alt="banner" />
