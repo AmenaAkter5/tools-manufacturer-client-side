@@ -20,6 +20,7 @@ import RequireAdmin from './Pages/Login/RequireAdmin/RequireAdmin';
 import Payment from './Pages/Dashboard/Payment/Payment';
 import ManageProducts from './Pages/Dashboard/ManageProducts/ManageProducts';
 import Portfolio from './Pages/Portfolio/Portfolio';
+import Blogs from './Pages/Blogs/Blogs';
 
 
 
@@ -31,6 +32,7 @@ function App() {
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
         <Route path='/portfolio' element={<Portfolio></Portfolio>}></Route>
+        <Route path='/blogs' element={<Blogs></Blogs>}></Route>
         <Route path='/purchase/:id' element={
           <RequireAuth>
             <Purchase></Purchase>

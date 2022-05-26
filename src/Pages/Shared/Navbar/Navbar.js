@@ -23,7 +23,7 @@ const Navbar = () => {
     const menuItems = <>
         <li><Link to="/home">Home</Link></li>
         <li><Link to="/portfolio">portfolio</Link></li>
-        <li><Link to="/about">About</Link></li>
+        <li><Link to="/blogs">Blogs</Link></li>
         {user && <li><Link to="/dashboard">Dashboard</Link></li>}
         <li>{user ? <button onClick={logOut} className="btn btn-ghost font-bold">Sign Out</button> : <Link to="/login">Login</Link>}</li>
     </>

@@ -18,17 +18,6 @@ const Purchase = () => {
     const { id } = useParams();
 
 
-
-    // if use react query
-    /* const { data: tool, isLoading, refetch } = useQuery('tools', () =>
-
-        fetch(`http://localhost:5000/available?date=${formattedDate}`)
-            .then(res => res.json()
-
-            )
-    ) */
-
-
     // tool data state
     const [tool, setTool] = useState({});
 
@@ -55,7 +44,6 @@ const Purchase = () => {
         event.preventDefault();
 
         const orderQuantity = parseInt(event.target.quantity.value);
-        // console.log(quantity);
 
         // order data
         const order = {
@@ -118,10 +106,6 @@ const Purchase = () => {
                 event.target.reset();
                 setMinQuantity(minimum);
 
-                // refetch from react query
-                // refetch();
-
-
             })
 
 
@@ -141,16 +125,6 @@ const Purchase = () => {
     const handleChange = event => {
         setMinQuantity(event.target.value);
     }
-
-
-    /* // use navigate hook
-    const navigate = useNavigate();
-
-    // manage inventory button handler
-    const manageInventoryHandle = () => {
-        navigate('/inventory');
-    } */
-
 
 
     return (
@@ -212,9 +186,6 @@ const Purchase = () => {
                     </div>
                 </div>
             </div>
-            {/* <div className='text-center'>
-                <button onClick={manageInventoryHandle} style={{ color: '#220768', fontSize: '20px' }} className='btn btn-link fw-bold mt-5 px-5 bg-white'>Manage Inventories</button>
-            </div> */}
         </section>
     );
 };
