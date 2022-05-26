@@ -173,7 +173,7 @@ const Purchase = () => {
                                 <label className="label">
                                     <span className="label-text font-bold">Order Quantity</span>
                                 </label>
-                                <input type="text" name='quantity' value={minQuantity || ''} onChange={handleChange} className="input-field max-w-xs" />
+                                <input type="text" name='quantity' value={minQuantity || minimum} onChange={handleChange} className="input-field max-w-xs" />
                                 <label className="label">
                                     {minimum > minQuantity && <span className="label-text text-red-600">You cant't place order below than minimum quantity</span>}
                                     {minQuantity > available && <span className="label-text text-red-600">You cant't place order more than available quantity</span>}
