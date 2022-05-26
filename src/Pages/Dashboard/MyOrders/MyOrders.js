@@ -31,8 +31,6 @@ const MyOrders = () => {
             })
                 .then(res => {
 
-                    // console.log(res);
-
                     if (res.status === 401 || res.status === 403) {
 
                         signOut(auth);
