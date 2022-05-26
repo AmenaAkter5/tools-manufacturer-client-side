@@ -51,25 +51,6 @@ const MyOrders = () => {
     }, [orders, user, email, navigate]);
 
 
-    // Delete button handler
-    /* const handleDelete = id => {
-
-        const proceed = window.confirm('Are you sure to delete?');
-
-        if (proceed) {
-            const url = `http://localhost:5000/orders/${id}`
-            fetch(url, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    // console.log(data);
-                    const remaining = orders.filter(order => order._id !== id);
-                    setOrders(remaining);
-                });
-        }
-    }; */
-
 
     return (
         <div>
@@ -98,14 +79,14 @@ const MyOrders = () => {
                                 <td>{order.price}</td>
                                 <td>{order.price * order.quantity}</td>
                                 <td>
-                                    {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-xs bg-green-600 text-white font-bold'>Pay</button></Link>}
+                                    {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-sm bg-green-600 text-white font-bold'>Pay</button></Link>}
                                     {(order.price && order.paid) && <div>
                                         <span className='text-green-600 font-bold'>Paid</span>
                                         <p>Transaction Id: <span className='text-orange-600'>{order.transactionId}</span></p>
                                     </div>}
                                 </td>
                                 <td>
-                                    {(order.price && !order.paid) ? <label htmlFor="delete-modal" onClick={() => setOrder(order)} className='btn btn-xs btn-error text-white font-bold'>Cancel</label> : ''}
+                                    {(order.price && !order.paid) ? <label htmlFor="delete-modal" onClick={() => setOrder(order)} className='btn btn-sm btn-error text-white font-bold'>Cancel</label> : ''}
                                 </td>
                             </tr>)
                         }
