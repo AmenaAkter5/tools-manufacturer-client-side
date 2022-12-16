@@ -7,7 +7,7 @@ const Reviews = () => {
 
     useEffect(() => {
 
-        fetch('https://infinite-lake-36259.herokuapp.com/reviews')
+        fetch('https://tools-manufacturer-server-side-production.up.railway.app/reviews')
             .then(res => res.json())
             .then(data => setReviews(data))
 

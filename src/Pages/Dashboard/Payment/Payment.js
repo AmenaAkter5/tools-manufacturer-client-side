@@ -15,7 +15,7 @@ const Payment = () => {
 
     const { id } = useParams();
 
-    const url = `https://infinite-lake-36259.herokuapp.com/orders/${id}`;
+    const url = `https://tools-manufacturer-server-side-production.up.railway.app/orders/${id}`;
 
     const { data: order, isLoading } = useQuery(['order', id], () => fetch(url, {
         method: 'GET',

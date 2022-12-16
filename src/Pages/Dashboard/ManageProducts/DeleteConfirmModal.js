@@ -7,7 +7,7 @@ const DeleteConfirmModal = ({ deletingTool, refetch, setDeletingTool }) => {
     const { _id, name } = deletingTool;
 
     const handleDelete = () => {
-        fetch(`https://infinite-lake-36259.herokuapp.com/tool/${_id}`, {
+        fetch(`https://tools-manufacturer-server-side-production.up.railway.app/tool/${_id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

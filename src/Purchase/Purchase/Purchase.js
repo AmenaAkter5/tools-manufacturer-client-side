@@ -26,7 +26,7 @@ const Purchase = () => {
 
     useEffect(() => {
 
-        const url = `https://infinite-lake-36259.herokuapp.com/tools/${id}`;
+        const url = `https://tools-manufacturer-server-side-production.up.railway.app/tools/${id}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setTool(data))
@@ -58,7 +58,7 @@ const Purchase = () => {
         }
 
 
-        fetch('https://infinite-lake-36259.herokuapp.com/orders', {
+        fetch('https://tools-manufacturer-server-side-production.up.railway.app/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -88,7 +88,7 @@ const Purchase = () => {
 
 
                 // update data to server
-                const url = `https://infinite-lake-36259.herokuapp.com/tools/${_id}`
+                const url = `https://tools-manufacturer-server-side-production.up.railway.app/tools/${_id}`
 
                 fetch(url, {
                     method: 'PUT',

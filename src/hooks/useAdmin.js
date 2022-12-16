@@ -12,7 +12,7 @@ const useAdmin = user => {
         const email = user?.email;
 
         if (email) {
-            fetch(`https://infinite-lake-36259.herokuapp.com/admin/${email}`, {
+            fetch(`https://tools-manufacturer-server-side-production.up.railway.app/admin/${email}`, {
 
                 method: 'GET',
                 headers: {

@@ -7,7 +7,7 @@ const useTools = () => {
 
     useEffect(() => {
 
-        fetch('https://infinite-lake-36259.herokuapp.com/tools')
+        fetch('https://tools-manufacturer-server-side-production.up.railway.app/tools')
             .then(res => res.json())
             .then(data => setTools(data))
 

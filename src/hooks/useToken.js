@@ -12,7 +12,7 @@ const useToken = user => {
         const currentUser = { email: email };
 
         if (user) {
-            fetch(`https://infinite-lake-36259.herokuapp.com/user/${email}`, {
+            fetch(`https://tools-manufacturer-server-side-production.up.railway.app/user/${email}`, {
 
                 method: 'PUT',
                 headers: {

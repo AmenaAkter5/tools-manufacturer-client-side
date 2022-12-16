@@ -30,7 +30,7 @@ const AddProduct = () => {
         }
 
 
-        fetch('https://infinite-lake-36259.herokuapp.com/tools', {
+        fetch('https://tools-manufacturer-server-side-production.up.railway.app/tools', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

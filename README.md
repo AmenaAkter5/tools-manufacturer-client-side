@@ -1,6 +1,6 @@
 # Toolsify
 
-This project is linked with [Firebase](https://tools-manufacturer-6cab0.web.app/) and [Mongodb](https://infinite-lake-36259.herokuapp.com/).
+This project is linked with [Firebase](https://tools-manufacturer-6cab0.web.app/) and [Mongodb](https://tools-manufacturer-server-side-production.up.railway.app/).
 
 
 This is the fullstack project. Front end and back end combination is used in this project. Firebase is using for authentication and hosting this site.
@@ -48,4 +48,4 @@ mobile.
 
 ## [Server Side Code Repository Link](https://github.com/programming-hero-web-course1/manufacturer-website-server-side-AmenaAkter5)
 
-## [Server Side link](https://infinite-lake-36259.herokuapp.com/)
+## [Server Side link](https://tools-manufacturer-server-side-production.up.railway.app/)

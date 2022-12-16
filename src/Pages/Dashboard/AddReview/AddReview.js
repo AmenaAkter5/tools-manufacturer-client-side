@@ -27,7 +27,7 @@ const AddReview = () => {
 
 
 
-        fetch('https://infinite-lake-36259.herokuapp.com/review', {
+        fetch('https://tools-manufacturer-server-side-production.up.railway.app/review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

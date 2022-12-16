@@ -11,7 +11,7 @@ const UserRow = ({ user, refetch, index }) => {
 
     const makeAdmin = () => {
 
-        fetch(`https://infinite-lake-36259.herokuapp.com/user/admin/${email}`, {
+        fetch(`https://tools-manufacturer-server-side-production.up.railway.app/user/admin/${email}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
